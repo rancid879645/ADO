@@ -1,34 +1,41 @@
 ﻿using Inventory.Model;
 using System.Collections.Generic;
-using System;
+using System.Linq;
+using Inventory.Data.Interfaces;
 
 namespace Inventory.Business
 {
     public class OrderBusiness
     {
-        public List<Order> GetAllOrders()
+        private readonly IOrderRepository _orderRepository;
+        public OrderBusiness(IOrderRepository orderRepository)
         {
-            throw new NotImplementedException();
+            _orderRepository = orderRepository;
+        }
+        public List<Order> GetAllorders()
+        {
+            var filter = new FilterOrder();
+            return _orderRepository.GetOrders(filter);
         }
 
-        public Order GetOrderById(int id)
+        public Order GetorderByParams(FilterOrder filterOrder)
         {
-            throw new NotImplementedException();
+            return _orderRepository.GetOrders(filterOrder).FirstOrDefault();
         }
 
-        public void UpdateOrder(Order order)
+        public void Updateorder(Order order)
         {
-
+            _orderRepository.UpdateOrder(order);
         }
 
-        public void DeleteOrder(int id)
+        public void Deleteorder(FilterOrder filterOrder)
         {
-
+            _orderRepository.DeleteOrder(filterOrder);
         }
 
-        public void CreateOrder(Order order)
+        public void Createorder(Order order)
         {
-
+            _orderRepository.CreateOrder(order);
         }
     }
 }

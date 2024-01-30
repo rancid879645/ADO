@@ -7,7 +7,7 @@ namespace Inventory.Data.Interfaces
     {
         void CreateOrder(Order order);
         void UpdateOrder(Order order);
-        void DeleteOrder(int id);
-        List<Order> GetOrders(int? id = null);
+        void DeleteOrder(FilterOrder filterOrder);
+        List<Order> GetOrders(FilterOrder filterOrder);
     }
 }
